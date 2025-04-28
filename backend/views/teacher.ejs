@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Učebna 17 - Moderní Rozvrh</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <h1>Učebna 17 - Rozvrh a Počítače</h1>
+
+  <div class="container">
+
+    <!-- Počítače -->
+    <div class="computer-bar">
+      <script>
+        for (let i = 1; i <= 15; i++) {
+          document.write(`<button class="computer" onclick="requestHelp(this)">PC ${i}</button>`);
+        }
+      </script>
+    </div>
+
+    <!-- Rozvrh -->
+    <div class="room-section">
+      <div class="room-title">📅 Rozvrh hodin - učebna 17</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Den</th>
+            <th>8:15 - 9:00</th>
+            <th>9:10 - 9:55</th>
+            <th>10:15 - 11:00</th>
+            <th>11:05 - 11:50</th>
+            <th>11:55 - 12:40</th>
+            <th>12:45 - 13:30</th>
+            <th>13:45 - 14:30</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pondělí</td>
+            <td class="subject">Programování</td>
+            <td class="subject">WWW</td>
+            <td class="empty">Volno</td>
+            <td class="subject">Kybernetika</td>
+            <td class="empty">Volno</td>
+            <td class="subject">IT právo</td>
+            <td class="empty">Volno</td>
+          </tr>
+          <tr>
+            <td>Úterý</td>
+            <td class="empty">Volno</td>
+            <td class="subject">Kybernetika</td>
+            <td class="subject">Počítačové sítě</td>
+            <td class="empty">Volno</td>
+            <td class="subject">Informatika</td>
+            <td class="empty">Volno</td>
+            <td class="subject">IT právo</td>
+          </tr>
+          <tr>
+            <td>Středa</td>
+            <td class="subject">Programování</td>
+            <td class="empty">Volno</td>
+            <td class="subject">Kybernetika</td>
+            <td class="subject">WWW</td>
+            <td class="empty">Volno</td>
+            <td class="subject">Informatika</td>
+            <td class="empty">Volno</td>
+          </tr>
+          <tr>
+            <td>Čtvrtek</td>
+            <td class="subject">Programování</td>
+            <td class="subject">Algoritmy</td>
+            <td class="empty">Volno</td>
+            <td class="subject">Sítě</td>
+            <td class="empty">Volno</td>
+            <td class="subject">Matematika</td>
+            <td class="empty">Volno</td>
+          </tr>
+          <tr>
+            <td>Pátek</td>
+            <td class="subject">Informatika</td>
+            <td class="subject">Týmový projekt</td>
+            <td class="empty">Volno</td>
+            <td class="subject">Týmový projekt</td>
+            <td class="empty">Volno</td>
+            <td class="subject">Kreativní programování</td>
+            <td class="empty">Volno</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script>
+    function requestHelp(btn) {
+      if (!btn.classList.contains("called")) {
+        btn.textContent += " 🔔";
+        btn.classList.add("called");
+        btn.disabled = true;
+      }
+    }
+  </script>
+
+</body>
+</html>
