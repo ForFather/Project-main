@@ -14,13 +14,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  secret: 'your_secret_key', // Change this in production
+  secret: 'secret_key', // Change this in production
   resave: false,
   saveUninitialized: false
 }));
 
 // MongoDB Connection
-mongoose.connect("mongodb+srv://petrsmolka5:9j2yhSmjU9fZiqRX@cluster0.ysk8doy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("connetction_Strting")
   .then(() => console.log("DB connected"))
   .catch(err => console.log(err));
 
