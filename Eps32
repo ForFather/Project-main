@@ -1,0 +1,65 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <ArduinoJson.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_ILI9341.h>
+
+#define TFT_CS   15
+#define TFT_DC   2
+#define TFT_RST  4
+
+Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
+
+// WiFi přihlašovací údaje
+const char* ssid = "NAZEV_WIFI";
+const char* password = "HESLO_WIFI";
+
+// URL serveru
+const char* serverUrl = "ip_adresa"; 
+
+void setup() {
+  Serial.begin(115200);
+  tft.begin();
+  tft.setRotation(1);
+  tft.fillScreen(ILI9341_BLACK);
+  tft.setTextColor(ILI9341_WHITE);
+  tft.setTextSize(2);
+
+  WiFi.begin(ssid, password);
+  tft.println("Připojuji WiFi...");
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  tft.println("WiFi připojena!");
+}
+
+void loop() {
+  if (WiFi.status() == WL_CONNECTED) {
+    HTTPClient http;
+    http.begin(serverUrl);
+    int httpCode = http.GET();
+
+    if (httpCode == 200) {
+      String payload = http.getString();
+      StaticJsonDocument<200> doc;
+      deserializeJson(doc, payload);
+      String message = doc["message"];
+
+      tft.fillScreen(ILI9341_BLACK);
+      tft.setCursor(10, 10);
+      tft.print("Z databaze:");
+      tft.setCursor(10, 40);
+      tft.print(message);
+    } else {
+      Serial.printf("Chyba HTTP: %d\n", httpCode);
+    }
+    http.end();
+  } else {
+    Serial.println("WiFi odpojeno.");
+  }
+
+  delay(5000); 
+}
